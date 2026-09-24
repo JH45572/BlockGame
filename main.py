@@ -1,5 +1,5 @@
-import src.runGame as runGame
+import src.runGame as run
 
 
 
-runGame.runTheGame()
+run.runTheGame()

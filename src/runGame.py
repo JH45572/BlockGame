@@ -1,5 +1,5 @@
 def runTheGame():
-    print("Running the game right now...")
+    print("Running the game right now... Be patient!")
 
 
 
