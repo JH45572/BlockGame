@@ -1,8 +1,16 @@
-import matplotlib.pyplot as plt
 import numpy as np
+import block as bl
 
-xpoints = np.array([0, 10])
-ypoints = np.array([0, 250])
+class Board:
+    def __init__(self, board):
+        self.board = board
+    def add_block(self, Block):           #TODO resolve shape discrepancy, add location parameter
+        self.board = self.board + Block.arr 
 
-plt.plot(xpoints, ypoints)
-plt.show()
+b = np.zeros((8, 8), dtype=int)
+
+newBlock = bl.Block(2)
+newBoard = Board(b)
+newBoard.add_block(newBlock)
+
+print(newBoard.board)
