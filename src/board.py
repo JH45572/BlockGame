@@ -5,13 +5,16 @@ class Board:
     def __init__(self, board):
         self.board = board
     def add_block(self, Block, loc):
-        Block.arr = Block.arr + loc           #TODO resolve shape discrepancy, add location parameter
-        self.board = self.board + Block.arr 
+        sh = Block.arr.shape
+        if(not (Block.test_loc(loc))):
+            self.board[loc[0]:sh[0]+loc[0], loc[1]:sh[1]+loc[1]] += Block.arr
+        else:
+            print("Cannot place block out of bounds")
 
 b = np.zeros((8, 8), dtype=int)
 
 newBlock = bl.Block(2)
 newBoard = Board(b)
-newBoard.add_block(newBlock)
+newBoard.add_block(newBlock, [1, 3])
 
 print(newBoard.board)
