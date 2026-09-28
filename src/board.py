@@ -11,6 +11,12 @@ class Board:
         else:
             print("Cannot place block out of bounds")
 
+
+
+
+
+
+
 b = np.zeros((8, 8), dtype=int)
 
 newBlock = bl.Block(2)

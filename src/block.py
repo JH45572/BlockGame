@@ -1,4 +1,5 @@
 import numpy as np
+from config import BOARD_SIZE
 
 def num_to_type(num):
     match num:
@@ -11,10 +12,14 @@ class Block:
     def __init__(self, typeNum):
         self.arr = num_to_type(typeNum)
     def test_loc(self, loc):
-        if (loc[0]+self.arr.shape[0] > 8) or (loc[1]+self.arr.shape[1] > 8) or (loc[0] < 0) or (loc[1] < 0):
+        if (loc[0]+self.arr.shape[0] > BOARD_SIZE) or (loc[1]+self.arr.shape[1] > BOARD_SIZE) or (loc[0] < 0) or (loc[1] < 0):
             return 1
         else:
             return 0
+
+
+
+
 
 b1 = Block(2)
 loc = [3, 4]
