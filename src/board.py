@@ -4,7 +4,8 @@ import block as bl
 class Board:
     def __init__(self, board):
         self.board = board
-    def add_block(self, Block):           #TODO resolve shape discrepancy, add location parameter
+    def add_block(self, Block, loc):
+        Block.arr = Block.arr + loc           #TODO resolve shape discrepancy, add location parameter
         self.board = self.board + Block.arr 
 
 b = np.zeros((8, 8), dtype=int)
