@@ -1,5 +1,11 @@
 import numpy as np
-import block as bl
+import src.block as bl
+
+
+
+
+
+
 
 class Board:
     def __init__(self, board):
@@ -16,11 +22,11 @@ class Board:
 
 
 
+if __name__ == "__main__":
+    b = np.zeros((8, 8), dtype=int)
 
-b = np.zeros((8, 8), dtype=int)
+    newBlock = bl.Block(2)
+    newBoard = Board(b)
+    newBoard.add_block(newBlock, [-1, 3])
 
-newBlock = bl.Block(2)
-newBoard = Board(b)
-newBoard.add_block(newBlock, [1, 3])
-
-print(newBoard.board)
+    print(newBoard.board)

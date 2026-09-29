@@ -4,3 +4,4 @@ from pathlib import Path
 PROJECT_ROOT = Path(__file__).resolve().parent
 
 BOARD_SIZE = 8 #size of each dimension of board (always a square board)
+
