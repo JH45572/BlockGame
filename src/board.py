@@ -12,8 +12,16 @@ class Board:
         self.board = board
     def add_block(self, Block, loc):
         sh = Block.arr.shape
+        fail_flag = 0
         if(not (Block.test_loc(loc))):
-            self.board[loc[0]:sh[0]+loc[0], loc[1]:sh[1]+loc[1]] += Block.arr
+            newarr = self.board[loc[0]:sh[0]+loc[0], loc[1]:sh[1]+loc[1]] + Block.arr
+            for x in np.nditer(newarr):
+                if (x > 1):
+                    print("invalid location")
+                    fail_flag = 1
+            if fail_flag == 0:
+                self.board[loc[0]:sh[0]+loc[0], loc[1]:sh[1]+loc[1]] = newarr
+
         else:
             print("Cannot place block out of bounds")
 

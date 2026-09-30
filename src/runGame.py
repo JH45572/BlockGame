@@ -9,8 +9,10 @@ def runTheGame():
 
     newBlock = bl.Block(10)
     newBoard = bo.Board(b)
-    newBoard.add_block(newBlock, [0, 5])
-
+    newBoard.add_block(newBlock, [0, 4])
+    print(newBoard.board)
+    newBlock = bl.Block(12)
+    newBoard.add_block(newBlock, [0, 3])
     print(newBoard.board)
 
 
