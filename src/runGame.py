@@ -7,12 +7,14 @@ def runTheGame():
     print("Running the game right now... Be patient!")
     b = np.zeros((8, 8), dtype=int)
 
-    newBlock = bl.Block(10)
+    newBlock = bl.Block(18)
     newBoard = bo.Board(b)
-    newBoard.add_block(newBlock, [0, 4])
+    newBoard.add_block(newBlock, [0, 0])
     print(newBoard.board)
-    newBlock = bl.Block(12)
-    newBoard.add_block(newBlock, [0, 3])
+    newBlock = bl.Block(18)
+    newBoard.add_block(newBlock, [4, 0])
+    print(newBoard.board)
+    newBoard.update_board()
     print(newBoard.board)
 
 

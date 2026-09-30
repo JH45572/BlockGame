@@ -4,9 +4,6 @@ import src.block as bl
 
 
 
-
-
-
 class Board:
     def __init__(self, board):
         self.board = board
@@ -24,17 +21,11 @@ class Board:
 
         else:
             print("Cannot place block out of bounds")
+    def update_board(self):
+        filter_column = np.all(self.board, axis = 0)
+        filter_row = np.all(self.board, axis = 1)
+        newBoard = self.board.copy()
+        newBoard[filter_row, :] = 0
+        newBoard[:, filter_column] = 0
+        self.board = newBoard
 
-
-
-
-
-
-if __name__ == "__main__":
-    b = np.zeros((8, 8), dtype=int)
-
-    newBlock = bl.Block(2)
-    newBoard = Board(b)
-    newBoard.add_block(newBlock, [-1, 3])
-
-    print(newBoard.board)
