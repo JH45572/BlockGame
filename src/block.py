@@ -77,7 +77,6 @@ class Block:
 
 
 
-
 if __name__ == "__main__":
     b1 = Block(2)
     loc = [3, 4]

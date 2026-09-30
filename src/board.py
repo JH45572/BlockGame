@@ -21,7 +21,7 @@ class Board:
 
         else:
             print("Cannot place block out of bounds")
-    def update_board(self):
+    def update_board(self):       #Clears all full rows/columns
         filter_column = np.all(self.board, axis = 0)
         filter_row = np.all(self.board, axis = 1)
         newBoard = self.board.copy()
