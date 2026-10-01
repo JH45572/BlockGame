@@ -7,6 +7,8 @@ import src.block as bl
 class Board:
     def __init__(self, board):
         self.board = board
+
+    #Adds a Block (type Block) at loc (type array e.g. [row, column]) on self.board
     def add_block(self, Block, loc):
         sh = Block.arr.shape
         fail_flag = 0
@@ -18,10 +20,12 @@ class Board:
                     fail_flag = 1
             if fail_flag == 0:
                 self.board[loc[0]:sh[0]+loc[0], loc[1]:sh[1]+loc[1]] = newarr
-
         else:
             print("Cannot place block out of bounds")
-    def update_board(self):       #Clears all full rows/columns
+
+
+    #Clears all full rows/columns
+    def update_board(self):       
         filter_column = np.all(self.board, axis = 0)
         filter_row = np.all(self.board, axis = 1)
         newBoard = self.board.copy()

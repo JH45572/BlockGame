@@ -3,27 +3,25 @@ import src.block as bl
 import numpy as np
 
 
+class Game:
+    def __init__(self, size):
+        self.board = bo.Board(np.zeros((size, size), dtype=int))
+        self.b1 = bl.Block(np.random.randint(18))
+        self.b2 = bl.Block(np.random.randint(18))
+        self.b3 = bl.Block(np.random.randint(18))
+
+    def make_move(self): #TODO finish
+        block_choice = input(f"choose block: b1: {self.b1.arr} \n b2:{self.b2.arr} \n b3: {self.b3.arr} \n")
+        block_placement = np.fromstring(input(f"enter location with form [row, column]...{self.board.board}"), sep=",")
+        self.board.add_block(block_choice, block_placement)
+        block_choice = None
 
 
-def player_move(board, currblocks): #TODO finish
-    block_choice = input(f"choose block: {currblocks}")
-    block_choice.used = True
-    block_placement = input(f"enter location with form [row, column]...{board}")
-    board.add_block(block_choice, block_placement)
 
 def runTheGame():
     print("Running the game right now... Be patient!")
-    b = np.zeros((8, 8), dtype=int)
-
-    newBoard = bo.Board(b)
-    newBoard.add_block(bl.Block(18), [0, 0])
-    newBoard.add_block(bl.Block(2), [5, 1])
-    newBoard.add_block(bl.Block(2), [5, 4])
-    newBoard.add_block(bl.Block(18), [4, 7])
-    newBoard.add_block(bl.Block(18), [4, 0])
-    print(newBoard.board)
-    newBoard.update_board()
-    print(newBoard.board)
+    G = Game(8)
+    G.make_move()
 
 
 
