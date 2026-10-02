@@ -1,6 +1,9 @@
 import numpy as np
 from config import BOARD_SIZE
 
+
+
+#code of each block
 def num_to_type(num):
     match num:
         case 0:
@@ -69,11 +72,13 @@ def num_to_type(num):
 class Block:
     def __init__(self, typeNum):
         self.arr = num_to_type(typeNum)
+
+    #returns True if block can fit on board when loc is upper left coordinate    
     def test_loc(self, loc):
         if (loc[0]+self.arr.shape[0] > BOARD_SIZE) or (loc[1]+self.arr.shape[1] > BOARD_SIZE) or (loc[0] < 0) or (loc[1] < 0):
-            return 1
+            return False
         else:
-            return 0
+            return True
 
 
 

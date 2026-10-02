@@ -24,40 +24,52 @@ class TerminalGame:
         self.board.add_block(block_choice, block_placement)
         block_choice = None
 
-    def check_block_pool(self):
+    #Refresh b1, b2, b3 if all are exhausted 
+    def check_block_pool(self): 
         if not (self.b1 or self.b2 or self.b3):
             self.b1 = bl.Block(np.random.randint(18))
             self.b2 = bl.Block(np.random.randint(18))
             self.b3 = bl.Block(np.random.randint(18))
 
     def check_game_over(self):
-        failureb1 = 0
-        failureb2 = 0
-        failureb3 = 0
+        failureb1 = False
+        failureb2 = False
+        failureb3 = False
         if(self.b1):
-            if(not (self.board.check_block_placability(self.b1))):
-                failureb1 = 1
+            if(not (self.board.check_block_placeability(self.b1))):
+                failureb1 = True
         if(self.b2):
-            if(not (self.board.check_block_placability(self.b2))):
-                failureb2 = 1
+            if(not (self.board.check_block_placeability(self.b2))):
+                failureb2 = True
         if(self.b3):
-            if( not (self.board.check_block_placability(self.b3))):
-                failureb3 = 1
+            if( not (self.board.check_block_placeability(self.b3))):
+                failureb3 = True
+        #Check if no blocks are placeable        
         if (failureb1 and failureb2 and failureb3): #game over
             print("GAME OVER!")
-            return 1
+            return True
         else:
-            return 0
+            return False
 
 
 
 def runTheGame():
     G = TerminalGame(BOARD_SIZE)
-    while(not G.check_game_over):
-        G.check_block_pool
-        G.make_terminal_move
-        G.board.update_board
-        print(G.board.board)
+    numTurns = 0
+    while(not G.check_game_over()):
+        print(f"After checking if game over: \n{G.board.board}")
+
+        G.check_block_pool()
+        print(f"After checking block pool: \n{G.board.board}")       
+
+        G.make_terminal_move()
+        print(f"After making terminal move: \n{G.board.board}")
+
+        G.board.update_board()
+        print(f"After updating board: \n{G.board.board}")
+
+        numTurns += 1
+        print(f"Turn number: {numTurns}")
     
 
 
