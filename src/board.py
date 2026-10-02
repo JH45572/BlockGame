@@ -17,6 +17,8 @@ class Board:
     def add_block(self, Block, loc):
         sh = Block.arr.shape
         fail_flag = False
+        if(Block == None):
+            fail_flag = True
         if(Block.test_loc(loc)):
             newarr = self.board[loc[0]:sh[0]+loc[0], loc[1]:sh[1]+loc[1]] + Block.arr
             for x in np.nditer(newarr):
