@@ -37,8 +37,6 @@ class Board:
                     placeability = True
         return placeability
 
-
-
     #Clears all full rows/columns
     def update_board(self):       
         filter_column = np.all(self.board, axis = 0)

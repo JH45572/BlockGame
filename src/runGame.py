@@ -13,16 +13,27 @@ class TerminalGame:
 
     #collect block choice and location from player playing from terminal
     def make_terminal_move(self): 
-        match input(f"choose block: b1: {self.b1.arr} \n b2:{self.b2.arr} \n b3: {self.b3.arr} \n"):
+        match input(f"choose block: b1: {self.b1.arr if self.b1 else "Empty"} \n b2:{self.b2.arr if self.b2 else "Empty"} \n b3: {self.b3.arr if self.b3 else "Empty"} \n"):
             case "b1":
-                block_choice = self.b1
+                if self.b1:
+                    block_choice = self.b1
+                    self.b1 = None
+                else:
+                    print("invalid")
             case "b2":
-                block_choice = self.b2
+                if self.b2:
+                    block_choice = self.b2
+                    self.b2 = None
+                else:
+                    print("invalid")
             case "b3":
-                block_choice = self.b3
+                if self.b3:
+                    block_choice = self.b3
+                    self.b3 = None
+                else:
+                    print("invalid")
         block_placement = np.fromstring(input(f"enter location with form [row, column]...{self.board.board}"), sep=",", dtype = int)
         self.board.add_block(block_choice, block_placement)
-        block_choice = None
 
     #Refresh b1, b2, b3 if all are exhausted 
     def check_block_pool(self): 
