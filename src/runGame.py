@@ -1,6 +1,7 @@
 import src.board as bo
 import src.block as bl
 import numpy as np
+from config import BOARD_SIZE
 
 
 class TerminalGame:
@@ -20,7 +21,6 @@ class TerminalGame:
             case "b3":
                 block_choice = self.b3
         block_placement = np.fromstring(input(f"enter location with form [row, column]...{self.board.board}"), sep=",", dtype = int)
-            #TODO fix formatting of block placement 
         self.board.add_block(block_choice, block_placement)
         block_choice = None
 
@@ -31,17 +31,34 @@ class TerminalGame:
             self.b3 = bl.Block(np.random.randint(18))
 
     def check_game_over(self):
-        pass
-
+        failureb1 = 0
+        failureb2 = 0
+        failureb3 = 0
+        if(self.b1):
+            if(not (self.board.check_block_placability(self.b1))):
+                failureb1 = 1
+        if(self.b2):
+            if(not (self.board.check_block_placability(self.b2))):
+                failureb2 = 1
+        if(self.b3):
+            if( not (self.board.check_block_placability(self.b3))):
+                failureb3 = 1
+        if (failureb1 and failureb2 and failureb3): #game over
+            print("GAME OVER!")
+            return 1
+        else:
+            return 0
 
 
 
 def runTheGame():
-    print("Running the game right now... Be patient!")
-    G = TerminalGame(8)
-    G.make_terminal_move()
-    G.check_block_pool
-    print(G.board.board)
+    G = TerminalGame(BOARD_SIZE)
+    while(not G.check_game_over):
+        G.check_block_pool
+        G.make_terminal_move
+        G.board.update_board
+        print(G.board.board)
+    
 
 
 

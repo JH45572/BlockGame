@@ -1,4 +1,5 @@
 import numpy as np
+from config import BOARD_SIZE
 import src.block as bl
 
 
@@ -22,6 +23,18 @@ class Board:
                 self.board[loc[0]:sh[0]+loc[0], loc[1]:sh[1]+loc[1]] = newarr
         else:
             print("Cannot place block out of bounds")
+            fail_flag = 1
+        return fail_flag
+
+    def check_block_placability(self, block):
+        placability = 0
+        for x in range(BOARD_SIZE):
+            for y in range(BOARD_SIZE):
+                newarr = self.board.copy()
+                if(newarr.add_block(block, [x, y])):
+                    placability = 1
+        return placability
+
 
 
     #Clears all full rows/columns
