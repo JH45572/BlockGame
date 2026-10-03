@@ -1,4 +1,4 @@
-import src.runGame as run
+import src.runTerminalGame as run
 import config
 
 

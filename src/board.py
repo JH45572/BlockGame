@@ -40,11 +40,19 @@ class Board:
         return placeability
 
     #Clears all full rows/columns
-    def update_board(self):       
+    def update_board(self):   
+        num_cleared = 0     
         filter_column = np.all(self.board, axis = 0)
         filter_row = np.all(self.board, axis = 1)
+        for col in filter_column:
+            if col:
+                num_cleared += 1
+        for row in filter_row:
+            if row:
+                num_cleared += 1
         newBoard = self.board.copy()
         newBoard[filter_row, :] = 0
         newBoard[:, filter_column] = 0
         self.board = newBoard
+        return num_cleared
 

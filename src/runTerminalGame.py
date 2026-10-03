@@ -4,9 +4,10 @@ import numpy as np
 from config import BOARD_SIZE
 
 
-class TerminalGame:
+class TerminalGame: #TODO implement scoring system
     def __init__(self, size):
         self.board = bo.Board(np.zeros((size, size), dtype=int))
+        self.score = 0
         self.b1 = bl.Block(np.random.randint(18))
         self.b2 = bl.Block(np.random.randint(18))
         self.b3 = bl.Block(np.random.randint(18))
@@ -86,7 +87,6 @@ class TerminalGame:
 
 def runTheGame():
     G = TerminalGame(BOARD_SIZE)
-    numTurns = 0
     while(not G.check_game_over()): #TODO get game over to trigger when it should
         #print(f"After checking if game over: \n{G.board.board}")
 
@@ -96,11 +96,11 @@ def runTheGame():
         if G.make_terminal_move(): 
             #print(f"After making terminal move: \n{G.board.board}")
 
-            G.board.update_board()
+            G.score += G.board.update_board()
             print(f"After updating board: \n{G.board.board}")
 
-            numTurns += 1
-            print(f"Turn number: {numTurns}")
+
+            print(f"Score: {G.score}")
     print("\n\n\nThank you for Playing!\n\n\n")
 
 
