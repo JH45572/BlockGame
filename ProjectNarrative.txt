@@ -1,0 +1,39 @@
+Phase 1: Game components design
+
+    This project began by making an important decision: how to encode blocks and the board. 
+    I decided to go with numpy arrays, as the core logic of the game is mostly matrix element operations. 
+    It was also a bonus that numpy is fast with this type of math, which I figured would come in handy during the
+    machine learning phase later on. Thus, the board is encoded as an 8x8 2D matrix, and each block is encoded as
+    a square matrix of varying sizes (each block type specifying where the 1s and 0s are). The thought process is 
+    that adding a block to the board simply entails adding the block elementwise to a subsection of the board,
+    this subsection defined by a set of coordinates indicating where the top left corner of the block matrix goes.
+
+
+
+Phase 2: Game logic implementation (concurrent with Terminal mode)
+
+    Now that the blocks and board design decision has been made, it is time to implement the logic. This involved 
+    starting with the most basic operations and iterating upon those. For example, add_block(block) began by
+    adding the elements of the block matrix to the upper-left subsection of the board matix. After this, I was able
+    to add a location parameter, specifying any subsection of the board that I wanted to add the block to.
+    Then, I needed to handle invalid locations (out of bounds). Then, I prevented adding a block in a location
+    where the block would overlap with a previously placed block (i.e., after adding, at least one "2" exists on 
+    the board). I decided to simply implement a boolean fail flag to add_block indicating whether or not the block
+    was successfully placed. After this, I implemented update_board() which provided the functionality to clear
+    full rows or columns. This would be called at the end of every move. 
+    With all this logic in place, I defined a game class that has three block attributes and a board attribute. 
+    The three blocks get reset once all three of them get used, and each can only get used once. 
+    Then, I implemented a check_game_over(). This gave me more trouble than I expected, as it required a complex
+    boolean statement checking each of the current block's ability to be placed on the board (complicated by the
+    fact that some of the blocks could be null).
+
+Phase 3: Running the Game from Terminal
+
+    Running the game from the terminal was easy to implement, but is cumbersome to play. Because playing from
+    the terminal was the first method of playing the game that I implemented, most of the effort applied to 
+    implement the terminal game was related to building the core game logic. However, two factors were 
+    considered that were uniquely related to the terminal implementation: How to specify a user's block choice
+    and location choice. I ended up making an arbitrary decision.
+
+Phase 4: Implementing GUI
+Phase 5: Machine Learning (projected)

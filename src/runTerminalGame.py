@@ -4,7 +4,7 @@ import numpy as np
 from config import BOARD_SIZE
 
 
-class TerminalGame: #TODO implement scoring system
+class TerminalGame:
     def __init__(self, size):
         self.board = bo.Board(np.zeros((size, size), dtype=int))
         self.score = 0
@@ -87,7 +87,7 @@ class TerminalGame: #TODO implement scoring system
 
 def runTheGame():
     G = TerminalGame(BOARD_SIZE)
-    while(not G.check_game_over()): #TODO get game over to trigger when it should
+    while(not G.check_game_over()): 
         #print(f"After checking if game over: \n{G.board.board}")
 
         G.check_block_pool()
