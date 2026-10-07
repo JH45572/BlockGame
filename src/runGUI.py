@@ -7,14 +7,14 @@ from config import BOARD_SIZE
 class BlockPuzzleGUI:
     def __init__(self, root):
         self.root = root
-        self.root.title("Block Puzzle! Emulator")
+        self.root.title("Block Puzzle")
         
         # Grid parameters
         self.rows = BOARD_SIZE
         self.cols = BOARD_SIZE
         self.cell_size = 50  # Pixels per grid square
-        self.tray_height = 150
-        self.preview_cell_size = 20
+        self.tray_height = 100
+        self.preview_cell_size = 15
         
         self.board = bo.Board(np.zeros((self.rows, self.cols), dtype=int))
         self.blocks = [bl.Block(np.random.randint(18)) for _ in range(3)]
@@ -26,7 +26,7 @@ class BlockPuzzleGUI:
         # Setup Canvas
         canvas_width = self.cols * self.cell_size
         canvas_height = self.rows * self.cell_size + self.tray_height
-        self.canvas = tk.Canvas(root, width=canvas_width, height=canvas_height, bg="#2A7F20")
+        self.canvas = tk.Canvas(root, width=canvas_width, height=canvas_height, bg="#F15CEC")
         self.canvas.pack(padx=20, pady=20)
         self.status_text = tk.StringVar(value="Score: 0 | Select a block below.")
         status_bar = tk.Frame(root)
@@ -79,7 +79,7 @@ class BlockPuzzleGUI:
             board_height,
             canvas_width,
             board_height + self.tray_height,
-            fill="#236b1c",
+            fill="#3575b5",
             outline="",
         )
         self.canvas.create_line(
