@@ -36,4 +36,8 @@ Phase 3: Running the Game from Terminal
     and location choice. I ended up making an arbitrary decision.
 
 Phase 4: Implementing GUI
+
+For this phase, I almost entirely used AI. I used Github copilot to look at the terminal game functionality and
+recreate the logic, this time embedded into a tkinter GUI.
+
 Phase 5: Machine Learning (projected)

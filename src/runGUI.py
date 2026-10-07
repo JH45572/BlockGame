@@ -29,9 +29,12 @@ class BlockPuzzleGUI:
         self.canvas = tk.Canvas(root, width=canvas_width, height=canvas_height, bg="#2A7F20")
         self.canvas.pack(padx=20, pady=20)
         self.status_text = tk.StringVar(value="Score: 0 | Select a block below.")
-        tk.Label(root, textvariable=self.status_text, anchor="w").pack(
-            fill=tk.X, padx=20, pady=(0, 12)
+        status_bar = tk.Frame(root)
+        status_bar.pack(fill=tk.X, padx=20, pady=(0, 12))
+        tk.Label(status_bar, textvariable=self.status_text, anchor="w").pack(
+            side=tk.LEFT, fill=tk.X, expand=True
         )
+        tk.Button(status_bar, text="Reset", command=self.reset_game).pack(side=tk.RIGHT)
         
         # Bind interactions
         self.canvas.bind("<Button-1>", self.handle_click)
@@ -193,6 +196,15 @@ class BlockPuzzleGUI:
             block is not None and self.board.check_block_placeability(block)
             for block in self.blocks
         )
+
+    def reset_game(self):
+        self.board = bo.Board(np.zeros((self.rows, self.cols), dtype=int))
+        self.blocks = [bl.Block(np.random.randint(18)) for _ in range(3)]
+        self.selected_block = None
+        self.score = 0
+        self.game_over = False
+        self.set_status("Select a block below.")
+        self.draw_board()
 
     def set_status(self, message):
         self.status_text.set(f"Score: {self.score} | {message}")
