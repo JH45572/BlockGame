@@ -3,7 +3,7 @@ import numpy as np
 import src.board as bo
 import src.block as bl
 from config import BOARD_SIZE
-
+small_blocks = [0, 6, 7, 11, 12, 13, 14, 15]
 
 class BlockPuzzleGUI:
     def __init__(self, root):
@@ -18,7 +18,7 @@ class BlockPuzzleGUI:
         self.preview_cell_size = 15
         
         self.board = bo.Board(np.zeros((self.rows, self.cols), dtype=int))
-        self.blocks = [bl.Block(np.random.randint(18)) for _ in range(3)]
+        self.blocks = [bl.Block(small_blocks[np.random.randint(7)]) for _ in range(3)] #TODO self.blocks = [bl.Block(np.random.randint(18)) for _ in range(3)]
         self.selected_block = None
         self.score = 0
         self.game_over = False
@@ -190,7 +190,8 @@ class BlockPuzzleGUI:
 
     def check_block_pool(self):
         if all(block is None for block in self.blocks):
-            self.blocks = [bl.Block(np.random.randint(18)) for _ in range(3)] 
+            self.blocks = [bl.Block(small_blocks[np.random.randint(7)]) for _ in range(3)] #TODO self.blocks = [bl.Block(np.random.randint(18)) for _ in range(3)]
+
     def check_game_over(self):
         return not any(
             block is not None and self.board.check_block_placeability(block)
@@ -209,10 +210,10 @@ class BlockPuzzleGUI:
     def set_status(self, message):
         self.status_text.set(f"Score: {self.score} | {message}")
 
-def runGUIMode():
+def runGUISmallMode():
     root = tk.Tk()
     app = BlockPuzzleGUI(root)
     root.mainloop()
 
 if __name__ == "__main__":
-    runGUIMode()
+    runGUISmallMode()

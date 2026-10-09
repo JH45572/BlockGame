@@ -1,8 +1,11 @@
 import src.runTerminalGame as run
 import config
+import src.runGUIsmall as runGs
 import src.runGUI as runG
 
 
-runG.runGUIMode()
+runGs.runGUISmallMode()
+#runG.runGUIMode()
 
 #run.runTheGame()
+
