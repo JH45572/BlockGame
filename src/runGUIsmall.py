@@ -6,8 +6,9 @@ from config import BOARD_SIZE
 small_blocks = [0, 6, 7, 11, 12, 13, 14, 15]
 
 class BlockPuzzleGUI:
-    def __init__(self, root):
+    def __init__(self, root, headless):
         self.root = root
+        self.is_headless = headless #should be boolean TODO: if clickable == false, don't handle clicks
         self.root.title("Block Puzzle")
         
         # Grid parameters
@@ -18,7 +19,7 @@ class BlockPuzzleGUI:
         self.preview_cell_size = 15
         
         self.board = bo.Board(np.zeros((self.rows, self.cols), dtype=int))
-        self.blocks = [bl.Block(small_blocks[np.random.randint(7)]) for _ in range(3)] #TODO self.blocks = [bl.Block(np.random.randint(18)) for _ in range(3)]
+        self.blocks = [bl.Block(small_blocks[np.random.randint(len(small_blocks)-1)]) for _ in range(3)] 
         self.selected_block = None
         self.score = 0
         self.game_over = False
@@ -190,8 +191,7 @@ class BlockPuzzleGUI:
 
     def check_block_pool(self):
         if all(block is None for block in self.blocks):
-            self.blocks = [bl.Block(small_blocks[np.random.randint(7)]) for _ in range(3)] #TODO self.blocks = [bl.Block(np.random.randint(18)) for _ in range(3)]
-
+            self.blocks = [bl.Block(small_blocks[np.random.randint(len(small_blocks)-1)]) for _ in range(3)] 
     def check_game_over(self):
         return not any(
             block is not None and self.board.check_block_placeability(block)
@@ -200,7 +200,7 @@ class BlockPuzzleGUI:
 
     def reset_game(self):
         self.board = bo.Board(np.zeros((self.rows, self.cols), dtype=int))
-        self.blocks = [bl.Block(small_blocks[np.random.randint(7)]) for _ in range(3)]
+        self.blocks = [bl.Block(small_blocks[np.random.randint(len(small_blocks)-1)]) for _ in range(3)]
         self.selected_block = None
         self.score = 0
         self.game_over = False
@@ -212,7 +212,7 @@ class BlockPuzzleGUI:
 
 def runGUISmallMode():
     root = tk.Tk()
-    app = BlockPuzzleGUI(root)
+    app = BlockPuzzleGUI(root, True)
     root.mainloop()
 
 if __name__ == "__main__":
