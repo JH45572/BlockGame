@@ -8,7 +8,7 @@ small_blocks = [0, 6, 7, 11, 12, 13, 14, 15]
 class BlockPuzzleGUI:
     def __init__(self, root, headless):
         self.root = root
-        self.is_headless = headless #should be boolean TODO: if clickable == false, don't handle clicks
+        self.is_headless = headless #should be boolean TODO: if headless == true, don't handle clicks
         self.root.title("Block Puzzle")
         
         # Grid parameters
@@ -140,42 +140,45 @@ class BlockPuzzleGUI:
                             width=1,
                         )
 
+    
+
     def handle_click(self, event):
-        """Selects a tray block or places it at a board cell."""
-        if self.game_over:
-            return
-
-        board_height = self.rows * self.cell_size
-        canvas_width = self.cols * self.cell_size
-        if board_height <= event.y < board_height + self.tray_height:
-            if 0 <= event.x < canvas_width:
-                block_index = int(event.x // (canvas_width / len(self.blocks)))
-                self.select_block(block_index)
-            return
-
-        col = event.x // self.cell_size
-        row = event.y // self.cell_size
-
-        if 0 <= row < self.rows and 0 <= col < self.cols:
-            if self.selected_block is None:
-                self.set_status("Select a block below first.")
-                return
-
-            block = self.blocks[self.selected_block]
-            if not self.board.add_block(block, (row, col)):
-                self.set_status("That placement is invalid. Choose another cell.")
-                return
-
-            self.blocks[self.selected_block] = None
-            self.selected_block = None
-            self.score += self.board.update_board()
-            self.check_block_pool()
-            self.game_over = self.check_game_over()
+        if self.is_headless == False:
+            """Selects a tray block or places it at a board cell."""
             if self.game_over:
-                self.set_status("Game over.")
-            else:
-                self.set_status("Block placed. Select another block.")
-            self.draw_board()
+                return
+
+            board_height = self.rows * self.cell_size
+            canvas_width = self.cols * self.cell_size
+            if board_height <= event.y < board_height + self.tray_height:
+                if 0 <= event.x < canvas_width:
+                    block_index = int(event.x // (canvas_width / len(self.blocks)))
+                    self.select_block(block_index)
+                return
+
+            col = event.x // self.cell_size
+            row = event.y // self.cell_size
+
+            if 0 <= row < self.rows and 0 <= col < self.cols:
+                if self.selected_block is None:
+                    self.set_status("Select a block below first.")
+                    return
+
+                block = self.blocks[self.selected_block]
+                if not self.board.add_block(block, (row, col)):
+                    self.set_status("That placement is invalid. Choose another cell.")
+                    return
+
+                self.blocks[self.selected_block] = None
+                self.selected_block = None
+                self.score += self.board.update_board()
+                self.check_block_pool()
+                self.game_over = self.check_game_over()
+                if self.game_over:
+                    self.set_status("Game over.")
+                else:
+                    self.set_status("Block placed. Select another block.")
+                self.draw_board()
 
     def select_block(self, block_index):
         if self.blocks[block_index] is None:
