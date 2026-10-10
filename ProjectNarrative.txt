@@ -52,8 +52,14 @@ Phase 5: Machine Learning
         am first going to skim through https://www.geeksforgeeks.org/machine-learning/machine-learning-tutorial/, a
         basic machine learning tutorial for beginners. A lot of the earlier stuff I can skim over (e.g. python basics,
         probability basics, etc.). 
-        I realize that the best ML schema for this task is reinforcement leanring. I calculated that there exists
-        something like 2.5*10^25 state action pairs (if I did my math correctly). This is too many to employ an 
+        I realize that the best ML schema for this task is some form of reinforcement leanring. I calculated that 
+        there exists something like 2.5*10^25 state action pairs (if I did my math correctly). This is too many to employ an 
         entire Q-table of every state action pair, so I will need to take a different approach. However, in the 
         meantime I can reduce the board size to a 3x3 and only use blocks that can fit into a 2x2 matrix. This 
-        yields a total of about 1.75*10^9 state action pairs, a bit more acceptable for an exuastive Q-table.
+        yields a total of about 7.7*10^6 state action pairs, a bit more acceptable for an exuastive Q-table.
+        
+    Subphase 2: Implementing Tabular Q-learning model on 3x3 game
+
+        While I know that the 8x8 game mode will not be able to use this strategy, I wanted to get more familiar with
+        reinforcement learning at a smaller scale so that I would have a better sense of what I am doing at the large
+        scale.

@@ -13,7 +13,7 @@ class BlockPuzzleGUI:
         # Grid parameters
         self.rows = BOARD_SIZE
         self.cols = BOARD_SIZE
-        self.cell_size = 50  # Pixels per grid square
+        self.cell_size = 120  # Pixels per grid square
         self.tray_height = 100
         self.preview_cell_size = 15
         
@@ -200,7 +200,7 @@ class BlockPuzzleGUI:
 
     def reset_game(self):
         self.board = bo.Board(np.zeros((self.rows, self.cols), dtype=int))
-        self.blocks = [bl.Block(np.random.randint(18)) for _ in range(3)]
+        self.blocks = [bl.Block(small_blocks[np.random.randint(7)]) for _ in range(3)]
         self.selected_block = None
         self.score = 0
         self.game_over = False
